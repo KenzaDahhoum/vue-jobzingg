@@ -21,7 +21,7 @@
         <div class="form-group">
           <label>Candidate Name</label>
           <input
-            v-model="name"
+            v-model="candidate.name"
             type="text"
             class="form-control"
           >
@@ -29,6 +29,7 @@
         <div class="form-group">
           <label>Phone Number</label>
           <input
+            v-model="candidate.website"
             type="text"
             class="form-control"
           >
@@ -36,7 +37,7 @@
         <div class="form-group">
           <label>Location</label>
           <input
-            v-model="location"
+            v-model="candidate.location"
             type="text"
             class="form-control"
           >
@@ -72,7 +73,6 @@
           Saave
         </b-button>
       </div>
-
     </b-modal>
   </div>
 </template>
@@ -80,9 +80,7 @@
 <script>
 import { mapActions } from 'vuex'
 // import axios from 'axios'
-import {
-  BButton, BModal,
-} from 'bootstrap-vue'
+import { BButton, BModal } from 'bootstrap-vue'
 
 export default {
   components: {
@@ -93,28 +91,34 @@ export default {
     close() {
       this.$refs['my-modal'].hide()
     },
-    ...mapActions(['addCandidate']),
+    ...mapActions(['addCandidate', 'fetchCandidates']),
+
     submit() {
-      this.addCandidate(this.name)
+      this.addCandidate(
+        this.name,
+        this.location,
+        this.website,
+        this.description,
+      )
+      console.log('testt')
+      this.fetchCandidates()
       this.$refs['my-modal'].hide()
     },
   },
   data() {
     return {
-      name: '',
-      location: '',
-      website: '',
-      description: '',
+      candidate: {
+        name: '',
+        location: '',
+        website: '',
+        description: '',
+      },
+
       inputRules: [
         value => !!value || 'Required.',
         value => (value && value.length >= 3) || 'Min 3 characters',
       ],
     }
   },
-  // methods: {
-  //   close() {
-  //     this.$refs['my-modal'].hide()
-  //   },
-  // },
 }
 </script>

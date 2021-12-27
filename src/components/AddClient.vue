@@ -21,6 +21,7 @@
         <div class="form-group">
           <label>Client Name</label>
           <input
+            v-model="name"
             type="text"
             class="form-control"
           >
@@ -70,6 +71,7 @@
 import {
   BButton, BModal,
 } from 'bootstrap-vue'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -80,6 +82,17 @@ export default {
     close() {
       this.$refs['my-modal'].hide()
     },
+    ...mapActions(['addClient']),
+
+    submit() {
+      this.addClient(this.name)
+      this.$refs['my-modal'].hide()
+    },
+  },
+  data() {
+    return {
+      name: '',
+    }
   },
 }
 </script>

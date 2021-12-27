@@ -39,6 +39,20 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/testP',
+      name: 'testP',
+      component: () => import('@/views/TestPrime.vue'),
+      meta: {
+        pageTitle: 'test',
+        breadcrumb: [
+          {
+            text: 'Client',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
       path: '/Candidate',
       name: 'Candidate',
       component: () => import('@/views/Candidate.vue'),

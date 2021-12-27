@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
+import PrimeVue from 'primevue/config'
+import Dialog from 'primevue/dialog'
 
 import router from './router'
 import store from './store'
@@ -16,10 +18,16 @@ import 'vue-good-table/dist/vue-good-table.css'
 import '@/libs/portal-vue'
 import '@/libs/toastification'
 
+// import style primevue
+import 'primevue/resources/themes/saga-blue/theme.css'      //theme
+import 'primevue/resources/primevue.min.css'                //core css
+import 'primeicons/primeicons.css'
 // BSV Plugin Registration
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
-
+// PrimeVue
+Vue.use(PrimeVue)
+Vue.component('Dialog', Dialog)
 // Composition API
 Vue.use(VueCompositionAPI)
 

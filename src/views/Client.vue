@@ -97,6 +97,7 @@
                   <feather-icon
                     icon="TrashIcon"
                     class="mr-50"
+                    @click="remove(client.id)"
                   />
                   <span>Delete</span>
                 </b-dropdown-item>
@@ -180,6 +181,7 @@ import {
   BDropdownItem,
 } from 'bootstrap-vue'
 import { VueGoodTable } from 'vue-good-table'
+import { mapActions } from 'vuex'
 import store from '@/store/index'
 import { codeBasic } from './code'
 import AddClient from '@/components/AddClient.vue'
@@ -198,6 +200,7 @@ export default {
     AddClient,
     BDropdownItem,
   },
+  methods: { ...mapActions(['remove']) },
   data() {
     return {
       pageLength: 3,
@@ -206,7 +209,7 @@ export default {
       columns: [
         {
           label: 'Position Name',
-          field: 'position_name',
+          field: 'client_name',
         },
         {
           label: 'Job Client',
@@ -239,27 +242,11 @@ export default {
       ],
       rows: [],
       searchTerm: '',
-      status: [
-        {
-          1: 'Current',
-          2: 'Professional',
-          3: 'Rejected',
-          4: 'Resigned',
-          5: 'Applied',
-        },
-        {
-          1: 'light-primary',
-          2: 'light-success',
-          3: 'light-danger',
-          4: 'light-warning',
-          5: 'light-info',
-        },
-      ],
     }
   },
 
   created() {
-    axios.get('http://localhost:3000/Job').then(res => {
+    axios.get('http://localhost:3005/client').then(res => {
       this.rows = res.data
     })
   },
